@@ -21,6 +21,7 @@ class App {
         this.initializeErrorHandling();
     }
 
+    // initializing our middleware
     private initializeMiddleware(): void {
         this.express.use(helmet());
         this.express.use(morgan('dev'));
@@ -30,16 +31,19 @@ class App {
         this.express.use(compression());
     }
 
+    // initializing our controllers
     private initializeControllers(controllers: Controller[]): void {
         controllers.forEach((controller: Controller) => {
             this.express.use('/api', controller.router);
         });
     }
 
+    // initializing the error controller
     private initializeErrorHandling(): void {
         this.express.use(ErrorMiddleware);
     }
 
+    // initializing database mongodb connection
     private initializeDatabaseConnection(): void {
         const { MONGODB_URL }: any = process.env;
 

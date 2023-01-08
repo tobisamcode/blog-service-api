@@ -4,9 +4,14 @@ import App from './server';
 
 import validateEnv from '@/utils/validateEnv';
 import PostController from '@/resources/post/post.controller';
+import GetController from '@/resources/get/get.controller';
+import GetByIdController from '@/resources/getById/getbyid.controller';
 
 validateEnv();
 
-const app = new App([new PostController()], Number(process.env.PORT));
+const app = new App(
+    [new PostController(), new GetController(), new GetByIdController()],
+    Number(process.env.PORT)
+);
 
 app.listen();
