@@ -6,4 +6,10 @@ const create = Joi.object({
     body: Joi.string().required(),
 });
 
-export default { create };
+const update = Joi.object({
+    title: Joi.string().optional(),
+
+    body: Joi.string().optional(),
+});
+
+export default { create, update };
