@@ -4,7 +4,7 @@ import Post from '@/resources/post/post.interface';
 class UpdateService {
     private post = PostModel;
 
-    // create a new post
+    // update an existing post
     public async update(
         id: string,
         body: {}
