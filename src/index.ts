@@ -8,6 +8,7 @@ import GetController from '@/resources/get/get.controller';
 import GetByIdController from '@/resources/getById/getbyid.controller';
 import DeleteController from '@/resources/delete/delete.controller';
 import UpdateController from '@/resources/update/update.controller';
+import UserController from '@/resources/user/user.controller';
 
 validateEnv();
 
@@ -18,6 +19,7 @@ const app = new App(
         new GetByIdController(),
         new DeleteController(),
         new UpdateController(),
+        new UserController(),
     ],
     Number(process.env.PORT)
 );
