@@ -2,19 +2,19 @@ import { Router, Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import Controller from '@/utils/interfaces/controller.interface';
 import HttpException from '@/utils/exceptions/http.exception';
-import GetByIdService from '@/resources/getById/getbyid.service';
+import DeleteService from '@/resources/delete/delete.service';
 
-class GetByIdController implements Controller {
+class DeleteController implements Controller {
     public path = '/posts/:id';
     public router = Router();
-    private GetByIdService = new GetByIdService();
+    private DeleteService = new DeleteService();
 
     constructor() {
         this.initializeRoutes();
     }
 
     private initializeRoutes(): void {
-        this.router.get(`${this.path}`, this.get);
+        this.router.delete(`${this.path}`, this.get);
     }
 
     private get = async (
@@ -29,13 +29,13 @@ class GetByIdController implements Controller {
                 return res.status(404).json({ error: 'no such post' });
             }
 
-            const post = await this.GetByIdService.get(id);
+            const post = await this.DeleteService.delete(id);
 
-            return res.status(200).json({ post });
-        } catch (error) {
-            next(new HttpException(404, 'cannot get posts, try again!'));
+            return res.status(200).json({ message: 'success', post });
+        } catch (error: any) {
+            next(new HttpException(400, error.message));
         }
     };
 }
 
-export default GetByIdController;
+export default DeleteController;
